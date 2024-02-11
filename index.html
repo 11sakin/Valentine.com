@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Will You Be My Valentine?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: black;
+}
+#content-container {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid;
+    box-shadow: -1px 0px 20px 10px rgb(244, 194, 194)
+}
+#question {
+    color: rgb(255, 255, 255);
+}
+  button {
+    font-size: 20px;
+    padding: 10px 20px;
+    margin: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  #yes {
+    background-color:#9fe79f;
+    color: rgb(0, 0, 0);
+    border: none;
+    
+    transition: all 0.5s ease;
+    font-size: 23px;
+  }
+#no {
+    background-color: #e59b9b;
+    color: rgb(3, 3, 3);
+    font-size: 23px;
+    border: none;
+}
+  #message {
+    display: none;
+    font-size: 53px;
+  }
+  #no-comment {
+    font-size: 27px;
+    color: #ffffff;
+    margin-top: 4px;
+}
+
+  @media only screen and (max-width: 600px) {
+    button {
+      font-size: 16px;
+      padding: 8px 16px;
+      margin: 10px;
+    }
+    #yes {
+      font-size: 9vw;
+    }
+  }
+</style>
+</head>
+<body>
+  <div id="content-container">
+    <h1 id="question">Will You Be My Valentine?</h1>
+    <div id="buttons">
+      <button id="yes" onclick="showMessage('yes')">Yes</button>
+      <button id="no" onclick="increaseSize('no')">No</button>
+    </div>
+    <p id="message"> Happy Valentine Day🥺  <br> <br> <img src="https://i.pinimg.com/originals/6c/4a/23/6c4a23ce4fce6669b273ba5d12e3b5b6.gif" alt="" srcset=""></p>
+    <p id="no-comment"></p>
+  </div>
+
+  <script>
+    let yesSize = 10.10;
+    let noClickCount = 0;
+    let comments = [
+      "Are you sure!🥺",
+      "If you say 'no' its very sad🥺",
+      "i'll be very very sad🥺",
+      "ok fine.. but click yes please🥺",
+      "For me🥹🥹 ",
+      "You're breaking my sweet heart🥺",
+      "Is there any love for me?",
+      "Does anyone care about me?",
+      "You're causing my heart to weep 😔",
+      "You're tearing my heart apart 💔",
+    ];
+    let remainingComments = comments.slice(); // Create a copy to keep track of remaining comments
+
+    function getRandomComment() {
+      if (remainingComments.length === 0) {
+        remainingComments = comments.slice(); // Reset when all comments are shown
+      }
+      const index = Math.floor(Math.random() * remainingComments.length);
+      const comment = remainingComments[index];
+      remainingComments.splice(index, 1);
+      return comment;
+    }
+
+    function increaseSize(option) {
+      if (option === 'no') {
+        noClickCount++;
+        if (noClickCount >= 11) { // Changed condition to 10 clicks
+          document.getElementById('yes').style.width = '100%';
+          document.getElementById('yes').style.height = '100vh';
+          document.getElementById('yes').style.position = 'absolute';
+          document.getElementById('yes').style.top = '0';
+          document.getElementById('yes').style.left = '0';
+          document.getElementById('yes').style.fontSize = '5vw';
+          document.getElementById('yes').style.borderRadius = '0';
+          document.getElementById('yes').style.backgroundImage = 'linear-gradient(to right, rgb(18 11 11), rgb(189 48 151))'; // Gradient background
+          document.getElementById('yes').style.color = 'white';
+        }
+        yesSize += 20; // Increase font size by 20px each time 'No' is clicked
+        document.getElementById('yes').style.fontSize = yesSize + 'px';
+        document.getElementById('no-comment').innerHTML = getRandomComment();
+      }
+    }
+
+    function showMessage(option) {
+      if (option === 'yes') {
+        document.getElementById('buttons').style.display = 'none';
+        document.getElementById('no-comment').style.display = 'none';
+        document.getElementById('message').style.display = 'block';
+        document.getElementById('message').style.color = 'white';
+        document.getElementById('question').style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
